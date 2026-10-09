@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Macaptcha | Test page</title>
+    <style>
+        #secret-menu {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Подтвердите, что вы человек, чтобы открыть меню:</h3>
+
+    <iframe 
+        src="https://timoniki.github.io/macaptcha" 
+        width="220" 
+        height="45" 
+        frameborder="0" 
+        scrolling="no">
+    </iframe>
+
+    <div id="secret-menu">
+        <h4>🎉 Ура! Доступ открыт.</h4>
+        <ul>
+            <li>Ссылка 1</li>
+            <li>Ссылка 2</li>
+        </ul>
+    </div>
+
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.origin !== 'https://github.io') return;
+
+            if (event.data.event === 'captcha_passed') {
+
+                document.getElementById('secret-menu').style.display = 'block';
+                
+                // Тут может быть любое другое действие:
+                // alert('Форма отправлена!');
+                // window.location.href = 'https://www.github.com/timoniki'; (перенаправление)
+            }
+        });
+    </script>
+
+</body>
+</html>
